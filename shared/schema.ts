@@ -31,8 +31,11 @@ export const orders = pgTable("orders", {
   userId: integer("user_id").notNull(),
   creditId: integer("credit_id").notNull(),
   quantity: integer("quantity").notNull(),
+  unitPrice: decimal("unit_price", { precision: 10, scale: 2 }).notNull(),
   totalPrice: decimal("total_price", { precision: 10, scale: 2 }).notNull(),
-  status: text("status").notNull().default("pending"), // pending, completed, cancelled
+  duration: text("duration").notNull(), // immediate, 1-year, 2-year, 5-year, 10-year
+  deliveryDate: timestamp("delivery_date"),
+  status: text("status").notNull().default("pending"), // pending, confirmed, processing, delivered, cancelled
   createdAt: timestamp("created_at").defaultNow(),
 });
 
@@ -61,6 +64,7 @@ export const insertOrderSchema = createInsertSchema(orders).omit({
   id: true,
   createdAt: true,
   status: true,
+  deliveryDate: true,
 });
 
 export const insertContactRequestSchema = createInsertSchema(contactRequests).omit({

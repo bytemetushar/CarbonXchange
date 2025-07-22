@@ -1,15 +1,20 @@
+import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import StockChart from "./stock-chart";
+import PurchaseModal from "./purchase-modal";
+import { useCartContext } from "@/contexts/cart-context";
 import type { CarbonCredit } from "@shared/schema";
 
 interface CarbonCreditCardProps {
   credit: CarbonCredit;
-  onAddToCart: (creditId: number) => void;
 }
 
-export default function CarbonCreditCard({ credit, onAddToCart }: CarbonCreditCardProps) {
+export default function CarbonCreditCard({ credit }: CarbonCreditCardProps) {
+  const [isPurchaseModalOpen, setIsPurchaseModalOpen] = useState(false);
+  const { addToCart } = useCartContext();
+  
   // Generate mock chart data based on credit price
   const basePrice = parseFloat(credit.price);
   const mockData = [
@@ -92,13 +97,28 @@ export default function CarbonCreditCard({ credit, onAddToCart }: CarbonCreditCa
             <span className="text-2xl font-bold text-primary">${credit.price}</span>
             <span className="text-gray-500 text-sm">/ton CO₂</span>
           </div>
-          <Button
-            onClick={() => onAddToCart(credit.id)}
-            className="bg-primary text-white hover:bg-primary/90"
-          >
-            Add to Cart
-          </Button>
+          <div className="flex gap-2">
+            <Button
+              variant="outline"
+              onClick={() => addToCart(credit)}
+              className="text-primary border-primary hover:bg-primary hover:text-white"
+            >
+              Add to Cart
+            </Button>
+            <Button
+              onClick={() => setIsPurchaseModalOpen(true)}
+              className="bg-primary text-white hover:bg-primary/90"
+            >
+              Buy Now
+            </Button>
+          </div>
         </div>
+        
+        <PurchaseModal
+          credit={credit}
+          isOpen={isPurchaseModalOpen}
+          onClose={() => setIsPurchaseModalOpen(false)}
+        />
       </CardContent>
     </Card>
   );

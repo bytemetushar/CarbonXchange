@@ -33,15 +33,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/orders", async (req, res) => {
     try {
       const validatedOrder = insertOrderSchema.parse(req.body);
+      
+      // Validate credit availability
+      const credit = await storage.getCarbonCredit(validatedOrder.creditId);
+      if (!credit) {
+        return res.status(404).json({ error: "Carbon credit not found" });
+      }
+      
+      if (credit.available < validatedOrder.quantity) {
+        return res.status(400).json({ 
+          error: "Insufficient credits available", 
+          available: credit.available 
+        });
+      }
+      
       const order = await storage.createOrder(validatedOrder);
       
       // Update credit availability
-      const credit = await storage.getCarbonCredit(validatedOrder.creditId);
-      if (credit && credit.available >= validatedOrder.quantity) {
-        await storage.updateCarbonCredit(validatedOrder.creditId, {
-          available: credit.available - validatedOrder.quantity
-        });
-      }
+      await storage.updateCarbonCredit(validatedOrder.creditId, {
+        available: credit.available - validatedOrder.quantity
+      });
       
       res.status(201).json(order);
     } catch (error) {

@@ -226,10 +226,34 @@ export class MemStorage implements IStorage {
 
   async createOrder(insertOrder: InsertOrder): Promise<Order> {
     const id = this.currentOrderId++;
+    
+    // Calculate delivery date based on duration
+    const deliveryDate = new Date();
+    switch (insertOrder.duration) {
+      case "immediate":
+        deliveryDate.setDate(deliveryDate.getDate() + 1);
+        break;
+      case "1-year":
+        deliveryDate.setFullYear(deliveryDate.getFullYear() + 1);
+        break;
+      case "2-year":
+        deliveryDate.setFullYear(deliveryDate.getFullYear() + 2);
+        break;
+      case "5-year":
+        deliveryDate.setFullYear(deliveryDate.getFullYear() + 5);
+        break;
+      case "10-year":
+        deliveryDate.setFullYear(deliveryDate.getFullYear() + 10);
+        break;
+      default:
+        deliveryDate.setDate(deliveryDate.getDate() + 7);
+    }
+    
     const order: Order = {
       ...insertOrder,
       id,
       status: "pending",
+      deliveryDate,
       createdAt: new Date(),
     };
     this.orders.set(id, order);
@@ -251,6 +275,7 @@ export class MemStorage implements IStorage {
     const request: ContactRequest = {
       ...insertRequest,
       id,
+      company: insertRequest.company || null,
       createdAt: new Date(),
     };
     this.contactRequests.set(id, request);

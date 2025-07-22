@@ -16,10 +16,7 @@ export default function Marketplace() {
     queryKey: ["/api/carbon-credits"],
   });
 
-  const handleAddToCart = (creditId: number) => {
-    console.log("Adding credit to cart:", creditId);
-    // TODO: Implement cart functionality
-  };
+
 
   // Filter and sort credits
   const filteredCredits = credits
@@ -37,7 +34,7 @@ export default function Marketplace() {
       }
     });
 
-  const creditTypes = [...new Set(credits.map(credit => credit.type))];
+  const creditTypes = Array.from(new Set(credits.map(credit => credit.type)));
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -104,7 +101,6 @@ export default function Marketplace() {
                 <CarbonCreditCard
                   key={credit.id}
                   credit={credit}
-                  onAddToCart={handleAddToCart}
                 />
               ))}
             </div>

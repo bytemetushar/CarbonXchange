@@ -1,8 +1,14 @@
+import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { MessageCircle, ShoppingCart, User } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import CartModal from "@/components/cart-modal";
+import { useCartContext } from "@/contexts/cart-context";
 
 export default function Header() {
   const [location] = useLocation();
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const { cartItems, removeFromCart, updateQuantity, updateDuration, clearCart, getCartItemCount } = useCartContext();
 
   const navigation = [
     { name: "Marketplace", href: "/marketplace" },
@@ -38,22 +44,43 @@ export default function Header() {
             </nav>
           </div>
           <div className="flex items-center space-x-4">
-            <button className="text-charcoal hover:text-primary transition-colors">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-charcoal hover:text-primary transition-colors"
+            >
               <MessageCircle className="h-5 w-5" />
-            </button>
-            <button className="text-charcoal hover:text-primary relative transition-colors">
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setIsCartOpen(true)}
+              className="text-charcoal hover:text-primary relative transition-colors"
+            >
               <ShoppingCart className="h-5 w-5" />
-              <span className="absolute -top-2 -right-2 bg-accent text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                3
-              </span>
-            </button>
-            <button className="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors flex items-center gap-2">
-              <User className="h-4 w-4" />
+              {getCartItemCount() > 0 && (
+                <span className="absolute -top-2 -right-2 bg-accent text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  {getCartItemCount()}
+                </span>
+              )}
+            </Button>
+            <Button className="bg-primary text-white hover:bg-primary/90 transition-colors">
+              <User className="h-4 w-4 mr-2" />
               My Account
-            </button>
+            </Button>
           </div>
         </div>
       </div>
+      
+      <CartModal
+        isOpen={isCartOpen}
+        onClose={() => setIsCartOpen(false)}
+        cartItems={cartItems}
+        onUpdateQuantity={updateQuantity}
+        onUpdateDuration={updateDuration}
+        onRemoveItem={removeFromCart}
+        onClearCart={clearCart}
+      />
     </header>
   );
 }

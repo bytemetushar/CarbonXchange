@@ -107,18 +107,32 @@ export default function Dashboard() {
                 <div className="space-y-4">
                   {orders.map((order) => (
                     <div key={order.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                      <div>
+                      <div className="flex-1">
                         <div className="font-medium text-charcoal">Order #{order.id}</div>
                         <div className="text-sm text-gray-500">
-                          {order.quantity} credits • ${order.totalPrice}
+                          {order.quantity.toLocaleString()} credits • ${parseFloat(order.totalPrice).toLocaleString()}
                         </div>
                         <div className="text-xs text-gray-400">
-                          {new Date(order.createdAt!).toLocaleDateString()}
+                          Ordered: {new Date(order.createdAt!).toLocaleDateString()}
+                        </div>
+                        {order.deliveryDate && (
+                          <div className="text-xs text-blue-600">
+                            Delivery: {new Date(order.deliveryDate).toLocaleDateString()} • {order.duration}
+                          </div>
+                        )}
+                      </div>
+                      <div className="text-right">
+                        <Badge variant={
+                          order.status === 'delivered' ? 'default' : 
+                          order.status === 'processing' ? 'secondary' :
+                          order.status === 'confirmed' ? 'outline' : 'secondary'
+                        }>
+                          {order.status}
+                        </Badge>
+                        <div className="text-sm text-gray-500 mt-1">
+                          ${parseFloat(order.unitPrice).toFixed(2)}/ton
                         </div>
                       </div>
-                      <Badge variant={order.status === 'completed' ? 'default' : 'secondary'}>
-                        {order.status}
-                      </Badge>
                     </div>
                   ))}
                 </div>

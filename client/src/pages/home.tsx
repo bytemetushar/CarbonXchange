@@ -18,10 +18,7 @@ export default function Home() {
     queryKey: ["/api/market-stats"],
   });
 
-  const handleAddToCart = (creditId: number) => {
-    console.log("Adding credit to cart:", creditId);
-    // TODO: Implement cart functionality
-  };
+
 
   const featuredCredits = credits.slice(0, 3);
 
@@ -72,25 +69,25 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="text-center">
               <div className="text-3xl font-bold text-primary">
-                {marketStats?.totalCredits || "2.4M"}
+                {(marketStats as any)?.totalCredits || "2.4M"}
               </div>
               <div className="text-sm text-gray-600">Credits Available</div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-secondary">
-                {marketStats?.activeBuyers || "15,200"}
+                {(marketStats as any)?.activeBuyers || "15,200"}
               </div>
               <div className="text-sm text-gray-600">Active Buyers</div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-success">
-                {marketStats?.verifiedSellers || "3,840"}
+                {(marketStats as any)?.verifiedSellers || "3,840"}
               </div>
               <div className="text-sm text-gray-600">Verified Sellers</div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-accent">
-                {marketStats?.carbonOffset || "890K"}
+                {(marketStats as any)?.carbonOffset || "890K"}
               </div>
               <div className="text-sm text-gray-600">Tons CO₂ Offset</div>
             </div>
@@ -129,7 +126,6 @@ export default function Home() {
                 <CarbonCreditCard
                   key={credit.id}
                   credit={credit}
-                  onAddToCart={handleAddToCart}
                 />
               ))}
             </div>
