@@ -165,6 +165,7 @@ export default function CartModal({
                                 <Button
                                   variant="outline"
                                   size="sm"
+                                  className="text-gray-500 hover:text-black"
                                   onClick={() => onUpdateQuantity(item.credit.id, Math.max(1, item.quantity - 1))}
                                 >
                                   <Minus className="h-3 w-3" />
@@ -180,6 +181,7 @@ export default function CartModal({
                                 <Button
                                   variant="outline"
                                   size="sm"
+                                  className="text-gray-500 hover:text-black"
                                   onClick={() => onUpdateQuantity(item.credit.id, Math.min(item.credit.available, item.quantity + 1))}
                                 >
                                   <Plus className="h-3 w-3" />
@@ -254,14 +256,14 @@ export default function CartModal({
                     <Button
                       variant="outline"
                       onClick={onClearCart}
-                      className="flex-1"
+                      className="flex-1 text-gray-900 hover:text-black border border-gray-300 hover:bg-gray-100 transition-colors"
                       disabled={isProcessing}
                     >
                       Clear Cart
                     </Button>
                     <Button
                       onClick={handlePurchaseAll}
-                      className="flex-1 bg-primary text-white hover:bg-primary/90"
+                      className="flex-1 text-gray-900 hover:text-white border border-gray-300 hover:bg-blue-600 bg-blue-700 text-white transition-colors"
                       disabled={isProcessing || cartItems.length === 0}
                     >
                       {isProcessing ? "Processing..." : `Purchase All (${cartItems.length} items)`}

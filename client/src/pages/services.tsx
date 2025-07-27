@@ -25,19 +25,19 @@ export default function Services() {
             <Card key={service.id} className="hover:shadow-lg transition-shadow">
               <CardContent className="p-6">
                 <div className={`w-12 h-12 ${service.color} rounded-lg flex items-center justify-center mb-4`}>
-                  <span className="text-white text-xl">{service.icon}</span>
+                  <span className="text-white text-2xl">{service.icon}</span>
                 </div>
                 <h3 className="text-xl font-semibold text-charcoal mb-3">{service.title}</h3>
                 <p className="text-gray-600 mb-4">{service.description}</p>
                 <ul className="text-sm text-gray-600 space-y-2 mb-6">
                   {service.features.map((feature, index) => (
                     <li key={index} className="flex items-center">
-                      <span className="w-2 h-2 bg-primary rounded-full mr-3"></span>
+                      <span className="w-2 h-2 bg-yellow-800 rounded-full mr-3"></span>
                       {feature}
                     </li>
                   ))}
                 </ul>
-                <Button variant="ghost" className="text-primary hover:text-primary/80 p-0">
+                <Button variant="ghost" className="flex-1 bg-yellow-600 text-white hover:text-white border border-gray-300 hover:bg-gray-600 transition-colors">
                   Learn More <ExternalLink className="ml-2 h-4 w-4" />
                 </Button>
               </CardContent>
@@ -47,17 +47,17 @@ export default function Services() {
 
         {/* Call to Action */}
         <div className="mt-16 text-center">
-          <Card className="bg-primary text-white">
+          <Card className="bg-gray-50 border border-gray-400 text-white">
             <CardContent className="p-12">
-              <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
-              <p className="text-xl mb-8 text-green-100">
+              <h2 className="text-3xl text-green-900 font-bold mb-4">Ready to Get Started?</h2>
+              <p className="text-xl mb-8 text-green-700 font-semibold">
                 Join thousands of organizations already using our platform for their carbon trading needs.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button className="bg-white text-primary hover:bg-gray-100">
+                <Button  className="border-green-800 border-green-800 border text-green-800 hover:bg-green-800 hover:border-green-800 hover:text-white flex-1">
                   Start Trading Today
                 </Button>
-                <Button variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
+                <Button variant="outline" className="border-blue-800 text-blue-800 hover:bg-blue-800 hover:border-blue-800 hover:text-white">
                   Schedule a Demo
                 </Button>
               </div>

@@ -76,7 +76,7 @@ export default function Contact() {
   const mockChatMessages = [
     {
       sender: "support",
-      message: "Hi! I'm Sarah, your carbon credit specialist. How can I help you today?",
+      message: "Hi! I'm Anushka, your carbon credit specialist. How can I help you today?",
       time: "2:30 PM",
     },
     {
@@ -177,7 +177,7 @@ export default function Contact() {
                   </div>
                   <Button
                     type="submit"
-                    className="w-full bg-primary text-white hover:bg-primary/90"
+                    className="border-blue-800 text-white bg-blue-800 hover:bg-blue-900 hover:border-blue-900 hover:text-white w-full"
                     disabled={contactMutation.isPending}
                   >
                     {contactMutation.isPending ? "Sending..." : "Send Message"}
@@ -197,29 +197,29 @@ export default function Contact() {
                 <div className="space-y-4">
                   <div className="flex items-center">
                     <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center mr-4">
-                      <Phone className="h-5 w-5 text-white" />
+                      <Phone className="h-5 w-5 text-green-700" />
                     </div>
                     <div>
                       <div className="font-medium text-charcoal">Phone</div>
-                      <div className="text-gray-600">+1 (555) 123-4567</div>
+                      <div className="text-gray-600">+91 8923988285</div>
                     </div>
                   </div>
                   <div className="flex items-center">
                     <div className="w-10 h-10 bg-secondary rounded-lg flex items-center justify-center mr-4">
-                      <Mail className="h-5 w-5 text-white" />
+                      <Mail className="h-5 w-5 text-red-700" />
                     </div>
                     <div>
                       <div className="font-medium text-charcoal">Email</div>
-                      <div className="text-gray-600">hello@carbontrade.com</div>
+                      <div className="text-gray-600">anushka@carbontrade.com</div>
                     </div>
                   </div>
                   <div className="flex items-center">
                     <div className="w-10 h-10 bg-success rounded-lg flex items-center justify-center mr-4">
-                      <MapPin className="h-5 w-5 text-white" />
+                      <MapPin className="h-5 w-5 text-yellow-700" />
                     </div>
                     <div>
                       <div className="font-medium text-charcoal">Address</div>
-                      <div className="text-gray-600">123 Green Street, Eco City, EC 12345</div>
+                      <div className="text-gray-600">123 Green Street, Eco City, Moradabad 12345</div>
                     </div>
                   </div>
                 </div>
@@ -232,33 +232,33 @@ export default function Contact() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
                     <div className="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-3">
-                      <MessageCircle className="h-4 w-4" />
+                      <MessageCircle className="h-7 w-7 text-gray-900" />
                     </div>
                     <div>
-                      <CardTitle className="text-white">Live Chat Support</CardTitle>
-                      <div className="text-sm text-green-200">Online now</div>
+                      <CardTitle className="text-gray-900 mb-2">Live Chat Support</CardTitle>
+                      <div className="text-sm text-green-700">Online now</div>
                     </div>
                   </div>
                 </div>
               </CardHeader>
               <CardContent className="p-0">
-                <div className="h-64 overflow-y-auto bg-gray-50 p-4">
+                <div className="h-64 overflow-y-auto bg-gray-100 p-4">
                   <div className="space-y-3">
                     {mockChatMessages.map((msg, index) => (
                       <div key={index} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'items-start'}`}>
                         {msg.sender === 'support' && (
                           <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center mr-3 flex-shrink-0">
-                            <MessageCircle className="h-4 w-4 text-white" />
+                            <MessageCircle className="h-4 w-4 text-gray-800" />
                           </div>
                         )}
                         <div className={`rounded-lg p-3 max-w-xs ${
                           msg.sender === 'user' 
-                            ? 'bg-primary text-white' 
+                            ? 'bg-green-500 text-white' 
                             : 'bg-white border border-gray-200'
                         }`}>
                           <div className="text-sm">{msg.message}</div>
                           <div className={`text-xs mt-1 ${
-                            msg.sender === 'user' ? 'text-green-200' : 'text-gray-500'
+                            msg.sender === 'user' ? 'text-gray-300' : 'text-gray-500'
                           }`}>
                             {msg.time}
                           </div>
@@ -278,9 +278,9 @@ export default function Contact() {
                     />
                     <Button
                       onClick={handleSendChatMessage}
-                      className="bg-primary text-white hover:bg-primary/90 rounded-l-none"
+                      className="bg-primary ml-1 text-white bg-yellow-600 hover:bg-yellow-800 rounded-l-none"
                     >
-                      <Send className="h-4 w-4" />
+                      <Send className="h-5 w-5" />
                     </Button>
                   </div>
                 </div>

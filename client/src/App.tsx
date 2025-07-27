@@ -10,6 +10,7 @@ import Marketplace from "@/pages/marketplace";
 import Dashboard from "@/pages/dashboard";
 import Services from "@/pages/services";
 import Contact from "@/pages/contact";
+import { BrowserRouter } from "react-router-dom";
 
 function Router() {
   return (
@@ -26,14 +27,16 @@ function Router() {
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <CartProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Router />
-        </TooltipProvider>
-      </CartProvider>
-    </QueryClientProvider>
+    <BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <CartProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Router />
+          </TooltipProvider>
+        </CartProvider>
+      </QueryClientProvider>
+    </BrowserRouter>
   );
 }
 

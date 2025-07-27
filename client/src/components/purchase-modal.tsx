@@ -254,14 +254,14 @@ export default function PurchaseModal({ credit, isOpen, onClose }: PurchaseModal
               <Button
                 variant="outline"
                 onClick={onClose}
-                className="flex-1"
+                className="flex-1 text-gray-900 hover:text-white border border-gray-300 hover:bg-red-500 transition-colors"
                 disabled={purchaseMutation.isPending}
               >
                 Cancel
               </Button>
               <Button
                 onClick={handlePurchase}
-                className="flex-1 bg-primary text-white hover:bg-primary/90"
+                className="flex-1 text-gray-900 hover:text-white border border-gray-300 hover:bg-blue-600 transition-colors"
                 disabled={purchaseMutation.isPending}
               >
                 {purchaseMutation.isPending ? "Processing..." : "Complete Purchase"}

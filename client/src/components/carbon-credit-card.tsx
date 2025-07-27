@@ -97,17 +97,17 @@ export default function CarbonCreditCard({ credit }: CarbonCreditCardProps) {
             <span className="text-2xl font-bold text-primary">${credit.price}</span>
             <span className="text-gray-500 text-sm">/ton CO₂</span>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-3">
             <Button
               variant="outline"
               onClick={() => addToCart(credit)}
-              className="text-primary border-primary hover:bg-primary hover:text-white"
+              className="text-primary border-primary hover:bg-blue-400"
             >
               Add to Cart
             </Button>
             <Button
               onClick={() => setIsPurchaseModalOpen(true)}
-              className="bg-primary text-white hover:bg-primary/90"
+              className="bg-yellow-800 text-white hover:bg-yellow-600"
             >
               Buy Now
             </Button>

@@ -105,7 +105,7 @@ export default function Marketplace() {
               ))}
             </div>
             <div className="text-center mt-12">
-              <Button variant="outline">Load More Credits</Button>
+              <Button variant="outline" className="hover:bg-gray-700">Load More Credits</Button>
             </div>
           </>
         ) : (

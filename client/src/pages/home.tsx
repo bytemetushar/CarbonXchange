@@ -27,7 +27,7 @@ export default function Home() {
       <Header />
       
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-primary to-green-700 text-white py-20">
+      <section className="bg-gradient-to-r from-primary to-gray-600 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -40,12 +40,12 @@ export default function Home() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/marketplace">
-                  <Button className="bg-white text-primary px-8 py-3 hover:bg-gray-100">
+                  <Button className="bg-yellow-800 text-white text-lg px-8 py-3 hover:bg-yellow-600">
                     Start Trading
                   </Button>
                 </Link>
                 <Link href="/services">
-                  <Button variant="outline" className="border-2 border-white text-white px-8 py-3 hover:bg-white hover:text-primary">
+                  <Button variant="outline" className="border-2 border-white text-white px-8 py-3 bg-transaprent hover:bg-green-700 hover:text-primary">
                     Learn More
                   </Button>
                 </Link>
@@ -57,7 +57,7 @@ export default function Home() {
                 alt="Sustainable office building"
                 className="rounded-xl shadow-2xl"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent rounded-xl"></div>
+              <div className="absolute inset-0 rounded-xl"></div>
             </div>
           </div>
         </div>
@@ -96,7 +96,7 @@ export default function Home() {
       </section>
 
       {/* Featured Carbon Credits */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center mb-12">
             <div>
@@ -104,7 +104,7 @@ export default function Home() {
               <p className="text-gray-600">Browse verified carbon credits from trusted sellers worldwide</p>
             </div>
             <Link href="/marketplace">
-              <Button variant="outline">View All Credits</Button>
+              <Button variant="outline" className="hover:bg-yellow-600">View All Credits</Button>
             </Link>
           </div>
 
@@ -189,7 +189,7 @@ export default function Home() {
                     ))}
                   </div>
                   <Link href="/dashboard">
-                    <Button variant="ghost" className="w-full mt-6">
+                    <Button variant="ghost" className="w-full bg-green-800 hover:bg-green-600 text-white mt-6">
                       View All Activity
                     </Button>
                   </Link>

@@ -4,11 +4,13 @@ import { MessageCircle, ShoppingCart, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import CartModal from "@/components/cart-modal";
 import { useCartContext } from "@/contexts/cart-context";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
   const [location] = useLocation();
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { cartItems, removeFromCart, updateQuantity, updateDuration, clearCart, getCartItemCount } = useCartContext();
+  const navigate = useNavigate();
 
   const navigation = [
     { name: "Marketplace", href: "/marketplace" },
@@ -18,8 +20,8 @@ export default function Header() {
   ];
 
   return (
-    <header className="bg-white shadow-sm border-b border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="bg-gray-700 text-white text-3xl">
+      <div className="max-w-7xl  mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <div className="flex-shrink-0">
@@ -47,6 +49,7 @@ export default function Header() {
             <Button
               variant="ghost"
               size="sm"
+              onClick={() => navigate("/contact")}
               className="text-charcoal hover:text-primary transition-colors"
             >
               <MessageCircle className="h-5 w-5" />
@@ -64,7 +67,8 @@ export default function Header() {
                 </span>
               )}
             </Button>
-            <Button className="bg-primary text-white hover:bg-primary/90 transition-colors">
+            {/* <Button className="bg-blue-400 text-white hover:bg-danger/90 transition-colors"> */}
+            <Button className="bg-transparent border border-primary text-white hover:bg-danger/90 transition-colors">
               <User className="h-4 w-4 mr-2" />
               My Account
             </Button>
@@ -81,6 +85,6 @@ export default function Header() {
         onRemoveItem={removeFromCart}
         onClearCart={clearCart}
       />
-    </header>
+    </nav>
   );
 }
