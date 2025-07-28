@@ -1,10 +1,22 @@
 import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
@@ -69,7 +81,7 @@ export default function CartModal({
       onClearCart();
       onClose();
     },
-    onError: (error: any) => {
+    onError: () => {
       toast({
         title: "Purchase Failed",
         description: "Some items could not be purchased. Please try again.",
@@ -82,7 +94,7 @@ export default function CartModal({
     if (cartItems.length === 0) return;
 
     setIsProcessing(true);
-    
+
     const orders: InsertOrder[] = cartItems.map((item) => {
       const unitPrice = parseFloat(item.credit.price);
       const totalPrice = unitPrice * item.quantity;
@@ -104,15 +116,15 @@ export default function CartModal({
     }
   };
 
-  const totalValue = cartItems.reduce((sum, item) => {
-    return sum + parseFloat(item.credit.price) * item.quantity;
-  }, 0);
-
+  const totalValue = cartItems.reduce(
+    (sum, item) => sum + parseFloat(item.credit.price) * item.quantity,
+    0
+  );
   const totalCredits = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl max-h-[80vh] overflow-hidden">
+      <DialogContent className="w-full max-w-[95vw] sm:max-w-2xl md:max-w-3xl lg:max-w-4xl max-h-[85vh]">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <ShoppingBag className="h-5 w-5" />
@@ -123,7 +135,7 @@ export default function CartModal({
           </DialogDescription>
         </DialogHeader>
 
-        <div className="flex flex-col h-full max-h-[60vh]">
+        <div className="flex flex-col h-full max-h-[65vh] overflow-y-auto">
           {cartItems.length === 0 ? (
             <div className="flex-1 flex items-center justify-center py-12">
               <div className="text-center">
@@ -134,19 +146,18 @@ export default function CartModal({
             </div>
           ) : (
             <>
-              {/* Cart Items */}
-              <div className="flex-1 overflow-y-auto space-y-4 mb-6">
+              <div className="space-y-4 mb-6">
                 {cartItems.map((item) => (
                   <Card key={item.credit.id}>
                     <CardContent className="p-4">
-                      <div className="flex gap-4">
+                      <div className="flex flex-col sm:flex-row gap-4">
                         <img
                           src={item.credit.imageUrl}
                           alt={item.credit.name}
-                          className="w-20 h-20 object-cover rounded-lg"
+                          className="w-full sm:w-24 sm:h-24 h-32 object-cover rounded-lg"
                         />
                         <div className="flex-1">
-                          <div className="flex justify-between items-start mb-2">
+                          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3 gap-2">
                             <h4 className="font-semibold text-lg">{item.credit.name}</h4>
                             <Button
                               variant="ghost"
@@ -157,7 +168,7 @@ export default function CartModal({
                               <Trash2 className="h-4 w-4" />
                             </Button>
                           </div>
-                          
+
                           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div>
                               <Label className="text-sm">Quantity</Label>
@@ -165,8 +176,12 @@ export default function CartModal({
                                 <Button
                                   variant="outline"
                                   size="sm"
-                                  className="text-gray-500 hover:text-black"
-                                  onClick={() => onUpdateQuantity(item.credit.id, Math.max(1, item.quantity - 1))}
+                                  onClick={() =>
+                                    onUpdateQuantity(
+                                      item.credit.id,
+                                      Math.max(1, item.quantity - 1)
+                                    )
+                                  }
                                 >
                                   <Minus className="h-3 w-3" />
                                 </Button>
@@ -175,14 +190,26 @@ export default function CartModal({
                                   min="1"
                                   max={item.credit.available}
                                   value={item.quantity}
-                                  onChange={(e) => onUpdateQuantity(item.credit.id, Math.max(1, parseInt(e.target.value) || 1))}
+                                  onChange={(e) =>
+                                    onUpdateQuantity(
+                                      item.credit.id,
+                                      Math.max(1, parseInt(e.target.value) || 1)
+                                    )
+                                  }
                                   className="w-20 text-center"
                                 />
                                 <Button
                                   variant="outline"
                                   size="sm"
-                                  className="text-gray-500 hover:text-black"
-                                  onClick={() => onUpdateQuantity(item.credit.id, Math.min(item.credit.available, item.quantity + 1))}
+                                  onClick={() =>
+                                    onUpdateQuantity(
+                                      item.credit.id,
+                                      Math.min(
+                                        item.credit.available,
+                                        item.quantity + 1
+                                      )
+                                    )
+                                  }
                                 >
                                   <Plus className="h-3 w-3" />
                                 </Button>
@@ -193,14 +220,19 @@ export default function CartModal({
                               <Label className="text-sm">Duration</Label>
                               <Select
                                 value={item.duration}
-                                onValueChange={(value) => onUpdateDuration(item.credit.id, value)}
+                                onValueChange={(value) =>
+                                  onUpdateDuration(item.credit.id, value)
+                                }
                               >
                                 <SelectTrigger className="mt-1">
                                   <SelectValue />
                                 </SelectTrigger>
                                 <SelectContent>
                                   {durationOptions.map((option) => (
-                                    <SelectItem key={option.value} value={option.value}>
+                                    <SelectItem
+                                      key={option.value}
+                                      value={option.value}
+                                    >
                                       {option.label}
                                     </SelectItem>
                                   ))}
@@ -208,16 +240,17 @@ export default function CartModal({
                               </Select>
                             </div>
 
-                            <div className="text-right">
+                            <div className="text-left sm:text-right">
                               <div className="text-sm text-gray-500">Unit Price</div>
                               <div className="text-lg font-semibold">${item.credit.price}/ton</div>
                               <div className="text-sm text-gray-500">
-                                Total: ${(parseFloat(item.credit.price) * item.quantity).toLocaleString()}
+                                Total: $
+                                {(parseFloat(item.credit.price) * item.quantity).toLocaleString()}
                               </div>
                             </div>
                           </div>
 
-                          <div className="flex items-center gap-2 mt-3">
+                          <div className="flex flex-wrap items-center gap-2 mt-3">
                             <Badge variant="secondary">{item.credit.type}</Badge>
                             <Badge variant="outline">{item.credit.location}</Badge>
                             <Badge className="bg-success text-white">{item.credit.verification}</Badge>
@@ -229,8 +262,8 @@ export default function CartModal({
                 ))}
               </div>
 
-              {/* Order Summary */}
-              <Card className="border-primary">
+              {/* ORDER SUMMARY */}
+              <Card>
                 <CardContent className="p-6">
                   <h3 className="text-xl font-semibold mb-4">Order Summary</h3>
                   <div className="space-y-3">
@@ -243,7 +276,7 @@ export default function CartModal({
                       <span className="font-medium">{totalCredits.toLocaleString()} tons CO₂</span>
                     </div>
                     <div className="border-t pt-3">
-                      <div className="flex justify-between items-center">
+                      <div className="flex justify-between items-center flex-wrap gap-2">
                         <span className="text-xl font-semibold">Total Value:</span>
                         <span className="text-2xl font-bold text-primary">
                           ${totalValue.toLocaleString()}
@@ -252,18 +285,18 @@ export default function CartModal({
                     </div>
                   </div>
 
-                  <div className="flex gap-3 mt-6">
+                  <div className="flex flex-col sm:flex-row gap-3 mt-6">
                     <Button
                       variant="outline"
                       onClick={onClearCart}
-                      className="flex-1 text-gray-900 hover:text-black border border-gray-300 hover:bg-gray-100 transition-colors"
+                      className="w-full sm:w-auto"
                       disabled={isProcessing}
                     >
                       Clear Cart
                     </Button>
                     <Button
                       onClick={handlePurchaseAll}
-                      className="flex-1 text-gray-900 hover:text-white border border-gray-300 hover:bg-blue-600 bg-blue-700 text-white transition-colors"
+                      className="w-full sm:w-auto bg-blue-700 hover:bg-blue-600 text-white"
                       disabled={isProcessing || cartItems.length === 0}
                     >
                       {isProcessing ? "Processing..." : `Purchase All (${cartItems.length} items)`}

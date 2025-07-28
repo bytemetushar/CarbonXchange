@@ -92,22 +92,22 @@ export default function CarbonCreditCard({ credit }: CarbonCreditCardProps) {
           <StockChart data={mockData} color={getChartColor(credit.type)} />
         </div>
 
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
           <div>
             <span className="text-2xl font-bold text-primary">${credit.price}</span>
             <span className="text-gray-500 text-sm">/ton CO₂</span>
           </div>
-          <div className="flex gap-3">
+          <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
             <Button
               variant="outline"
               onClick={() => addToCart(credit)}
-              className="text-primary border-primary hover:bg-blue-400"
+              className="text-primary border-primary w-full sm:w-auto hover:bg-blue-400"
             >
               Add to Cart
             </Button>
             <Button
               onClick={() => setIsPurchaseModalOpen(true)}
-              className="bg-yellow-800 text-white hover:bg-yellow-600"
+              className="bg-yellow-800 text-white w-full sm:w-auto hover:bg-yellow-600"
             >
               Buy Now
             </Button>

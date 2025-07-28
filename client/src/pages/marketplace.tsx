@@ -41,14 +41,14 @@ export default function Marketplace() {
       <Header />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex justify-between items-center mb-12">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-12">
           <div>
             <h1 className="text-3xl font-bold text-charcoal mb-2">Carbon Credits Marketplace</h1>
             <p className="text-gray-600">Browse verified carbon credits from trusted sellers worldwide</p>
           </div>
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
             <Select value={typeFilter} onValueChange={setTypeFilter}>
-              <SelectTrigger className="w-48">
+              <SelectTrigger className="w-full sm:w-48">
                 <SelectValue placeholder="Filter by type" />
               </SelectTrigger>
               <SelectContent>
@@ -105,7 +105,7 @@ export default function Marketplace() {
               ))}
             </div>
             <div className="text-center mt-12">
-              <Button variant="outline" className="hover:bg-gray-700">Load More Credits</Button>
+              <Button variant="outline" className="w-full sm:w-auto hover:bg-gray-700">Load More Credits</Button>
             </div>
           </>
         ) : (

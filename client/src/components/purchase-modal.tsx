@@ -115,7 +115,7 @@ export default function PurchaseModal({ credit, isOpen, onClose }: PurchaseModal
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl">
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Purchase Carbon Credits</DialogTitle>
           <DialogDescription>
